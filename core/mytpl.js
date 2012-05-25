@@ -16,6 +16,7 @@ exports.viewEngine = {
 	            }
 
 	            // 将全局变量分配到模板中
+	            context = context || {};
 	            context.base_dir = BASE_DIR;
 	            context.public = '/public';
 	            context.view = '/' + actionInfo.application + '/views';

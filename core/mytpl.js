@@ -1,6 +1,6 @@
 exports.viewEngine = {
     render : function(req, res, viewName, context) {
-		var filename = BASE_DIR + '/' + actionInfo.application + '/views/' + viewName;
+		var filename = BASE_DIR + '/' + req.actionInfo.application + '/views/' + viewName;
 		
 		path.exists(filename, function(exists) {			
 	        if (!exists) {  
@@ -19,8 +19,8 @@ exports.viewEngine = {
 	            context = context || {};
 	            context.base_dir = BASE_DIR;
 	            context.public = '/public';
-	            context.view = '/' + actionInfo.application + '/views';
-	            context.res = '/' + actionInfo.application + '/views/resource';           
+	            context.view = '/' + req.actionInfo.application + '/views';
+	            context.res = '/' + req.actionInfo.application + '/views/resource';           
 	            var file = ejs.render(file, context);
 	            
 	            res.writeHead(200, {'Content-Type': 'text/html'});

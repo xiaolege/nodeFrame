@@ -33,4 +33,3 @@ function mysql() {
 }
 global.client = client;
 exports.mysql = mysql;
-exports.a = a;

@@ -19,6 +19,7 @@
     	});
         
     }).listen(port);
+    
     console.log('Server running at http://127.0.0.1:' + port + '/');
 };
 
@@ -26,28 +27,24 @@
  * 所有请求的统一入口
  */
 var handlerRequest = function(req, res) {
-
-	global.req = req;
-	global.res = res;
-	global.post = req.post;
-    global.actionInfo = prourl.getActionInfo(req.url, req.method);
-    console.log(req.method + '：' + req.url);
-
+	console.log(req.method + '：' + req.url);
+	
+    var actionInfo = prourl.getActionInfo(req.url, req.method);
+    req.actionInfo = actionInfo;
+ 
     if (actionInfo.action) {    
-    	i++;
         var controller = require(BASE_DIR + '/' + actionInfo.application + '/controllers/' + actionInfo.controller);
         
         if (controller[actionInfo.action]) {        	
             var ct = new controllerContext(req, res);
 
             // 通过apply将controller的上下文对象传递给action
-            controller[actionInfo.action].apply(ct, actionInfo.args);i++;
+            controller[actionInfo.action].apply(ct, actionInfo.args);
          
         } else {
             handler500(req, res, 'Error: controller "' + actionInfo.controller + '" without action "' + actionInfo.action + '"')
         }
-    } else { 
-    	i++;
+    } else {
         mytpl.staticFileServer(req, res);
     }
 };
@@ -63,3 +60,4 @@ var controllerContext = function(req, res) {
 controllerContext.prototype.render = function(viewName, context) {
     mytpl.viewEngine.render(this.req, this.res, viewName, context); 
 };
+controllerContext.prototype.success = action.success;

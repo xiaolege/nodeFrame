@@ -1,4 +1,4 @@
-var Dmysql = require('mysql');
+﻿var Dmysql = require('mysql');
 var client = Dmysql.createClient({
 	host : HOST,
 	user : USER,
@@ -33,3 +33,4 @@ function mysql() {
 }
 global.client = client;
 exports.mysql = mysql;
+exports.a = a;

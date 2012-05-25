@@ -1,4 +1,4 @@
-exports.runServer = function(port) {
+﻿exports.runServer = function(port) {
     port = port || 8080;
     
     var server = http.createServer(function(req, res) {
@@ -31,21 +31,23 @@ var handlerRequest = function(req, res) {
 	global.res = res;
 	global.post = req.post;
     global.actionInfo = prourl.getActionInfo(req.url, req.method);
-    console.log(req.url);
+    console.log(req.method + '：' + req.url);
 
-    if (actionInfo.action) {    	
+    if (actionInfo.action) {    
+    	i++;
         var controller = require(BASE_DIR + '/' + actionInfo.application + '/controllers/' + actionInfo.controller);
         
         if (controller[actionInfo.action]) {        	
             var ct = new controllerContext(req, res);
 
             // 通过apply将controller的上下文对象传递给action
-            controller[actionInfo.action].apply(ct, actionInfo.args);
-            
+            controller[actionInfo.action].apply(ct, actionInfo.args);i++;
+         
         } else {
             handler500(req, res, 'Error: controller "' + actionInfo.controller + '" without action "' + actionInfo.action + '"')
         }
-    } else {
+    } else { 
+    	i++;
         mytpl.staticFileServer(req, res);
     }
 };

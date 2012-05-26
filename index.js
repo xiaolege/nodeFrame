@@ -19,8 +19,10 @@ global.ejs = require('ejs');
 global.prourl = require(CORE + 'prourl');
 global.mytpl = require(CORE + 'mytpl');
 global.action = require(CORE + 'action');
-global.mine = require(CONF + 'mine').mine;
 global.mysql = require(CORE + 'mysql');	
+global.functions = require(CORE + 'functions');	
+global.array = require(CORE + 'array');	
+global.mine = require(CONF + 'mine').mine;
 
 // 加载路由规则
 require(CONF + 'route');

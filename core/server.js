@@ -56,8 +56,9 @@ var controllerContext = function(req, res) {
     this.handler404 = action.handler404;
     this.handler500 = action.handler500;
 };
-
 controllerContext.prototype.render = function(viewName, context) {
     mytpl.viewEngine.render(this.req, this.res, viewName, context); 
 };
-controllerContext.prototype.success = action.success;
+controllerContext.prototype.success = function(mess, timeout, location) {
+	action.success(this.req, this.res, mess, timeout, location);
+}

@@ -4,11 +4,11 @@
  * @param integer timeout 跳转时间
  * @param string location 提示消息
  */
-exports.success = function(mess, timeout, location) {
+exports.success = function(req, res, mess, timeout, location) {
 	mess = mess || '提示信息';
 	timeout = timeout || 1;
 	location = location || '';
-	pub(mess, timeout, location, true, this.req, this.res); //如果成功 $mark=true
+	pub(req, res, mess, timeout, location, true); //如果成功 $mark=true
     return;
 };
 
@@ -22,7 +22,7 @@ exports.handler500 = function(req, res) {
     res.end('500 Internal Server Error');
 };
 
-function pub(mess, timeout, location, mark, req, res) {
+function pub(req, res, mess, timeout, location, mark) {
 	if (location == '') {
 		location = 'window.history.back();';
 	} else {

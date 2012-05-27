@@ -31,7 +31,7 @@ exports.mysql = function() {
 		var key = array.array_add( array.array_keys(data) , '`').join(',');
 		var	value = array.array_add( array.array_values(data) , "'").join(',');
 		
-		var sql = "INSERT INTO `chat`.`chat_user1` (" + key + ") VALUES (" + value + ")";
+		var sql = "INSERT INTO `chat`.`chat_user` (" + key + ") VALUES (" + value + ")";
 		console.log(sql);
 		
 		client = this.connect();
